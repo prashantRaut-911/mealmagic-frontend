@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark meal-navbar px-3 shadow-sm">
+  <a class="navbar-brand fw-bold text-white" routerLink="/user/home">
+    🍽️ Meal Magic User
+  </a>
+
+  <!-- Mobile Toggler -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    (click)="isMenuCollapsed = !isMenuCollapsed"
+    [attr.aria-expanded]="!isMenuCollapsed"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible Menu -->
+  <div class="collapse navbar-collapse" [ngClass]="{ show: !isMenuCollapsed }">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="">Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user/view-dishes" >Dishes</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user/my-review" >Reviews</a>
+      </li>
+
+       <li class="nav-item">
+        <a class="nav-link" routerLink="/user/orders" >My Orders</a>
+      </li>
+
+      <li class="nav-item">
+        <button
+          mat-icon-button
+          class="btn btn-outline-light ms-2 me-2"
+          routerLink="/user/cart"
+          aria-label="Cart"
+        >
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="btn btn-orange ms-2" (click)="logout()">Logout</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

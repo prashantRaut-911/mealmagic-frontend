@@ -1,0 +1,112 @@
+.dashboard-container {
+    background: #f8f9fa;
+  }
+  
+  /* ✅ Stats Cards */
+  .stat-card {
+    padding: 25px 0;
+    border-radius: 12px;
+    color: #fff;
+  }
+  
+  .stat-card h5 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .stat-card h2 {
+    font-size: 34px;
+    font-weight: 700;
+  }
+  
+  /* ✅ Gradient Colors exactly as screenshot */
+  .stat-users {
+    background: linear-gradient(135deg, #1b8e2a, #49d17c);
+  }
+  
+  .stat-dishes {
+    background: linear-gradient(135deg, #e2b030, #f3cb3b);
+  }
+  
+  .stat-pets {
+    background: linear-gradient(135deg, #2566e8, #63a7ff);
+  }
+  
+  .stat-orders {
+    background: linear-gradient(135deg, #ce6b2a, #e18f47);
+  }
+  
+  .stat-reviews {
+    background: linear-gradient(135deg, #8748df, #b16cff);
+  }
+  
+  .stat-card:hover {
+    transform: scale(1.03);
+    transition: 0.3s;
+  }
+
+  .text-success {
+    font-size : 14px;
+  }
+  
+  /* ✅ Improved Table Design */
+  .table-header {
+    background: #1e9b42;
+  }
+  
+  table {
+    background: #fff;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  thead th {
+    border-bottom: none !important;
+    padding: 14px;
+    font-size: 15px;
+  }
+  
+  tbody td {
+    padding: 12px;
+  }
+  
+  tbody tr:hover {
+    background: #eef7ee;
+    cursor: pointer;
+  }
+  /* ✅ Force header background to show */
+  .table-header,
+  .table-header th {
+    background-color:#ff7043!important;
+    color: #ffffff !important;
+  }
+  thead th {
+    letter-spacing: 0.5px;
+  }
+  
+  .sort-toggle-btn {
+  background-color: #f0f4ff;
+  border: 1px solid #c3d4ff;
+  color: #0056d2;
+  transition: all 0.3s ease;
+}
+
+.sort-toggle-btn:hover {
+  background-color: #e1ecff;
+  transform: translateY(-1px);
+}
+
+.action-btn {
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+}

@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center fw-bold">📦 My Orders</h2>
+
+  <div *ngIf="orders.length > 0; else noOrders">
+    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center stretch" fxLayoutWrap>
+      <mat-card
+        *ngFor="let order of orders"
+        class="order-card mb-3"
+        [ngClass]="getStatusClass(order.orderStatus)"
+      >
+        <mat-card-header>
+          <mat-card-title>Order #{{ order._id }}</mat-card-title>
+          <mat-card-subtitle>{{ order.orderDate | date: 'medium' }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p><strong>Total:</strong> ₹{{ order.totalAmount }}</p>
+          <p><strong>Shipping:</strong> {{ order.shippingAddress }}</p>
+
+          <!-- <mat-form-field appearance="fill" class="w-100 mt-2">
+            <mat-label>Order Status</mat-label>
+            <mat-select
+              [(value)]="order.orderStatus"
+              (selectionChange)="onStatusChange(order)"
+            >
+              <mat-option value="Pending">Pending</mat-option>
+              <mat-option value="Processing">Processing</mat-option>
+              <mat-option value="Delivered">Delivered</mat-option>
+              <mat-option value="Completed">Completed</mat-option>
+              <mat-option value="Received">Received</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+          <hr />
+
+          <h6 class="fw-semibold">Ordered Items:</h6>
+          <div
+            *ngFor="let item of order.orderItems"
+            class="d-flex align-items-center mt-2"
+          >
+            <img
+              [src]="'https://8080-fefddffbfaca334814657faebceadbeeddaone.premiumproject.examly.io/' + item.orders.coverImage.path"
+              alt="{{ item.orders.dishName }}"
+              class="rounded me-3"
+              width="60"
+              height="60"
+              style="object-fit: cover"
+            />
+            <div>
+              <p class="mb-1 fw-bold">{{ item.orders.dishName }}</p>
+              <small class="text-muted">{{ item.orders.cuisine }}</small><br />
+              <span>₹{{ item.orders.price }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <ng-template #noOrders>
+    <p class="text-center text-muted mt-5">No orders yet.</p>
+  </ng-template>
+</div>

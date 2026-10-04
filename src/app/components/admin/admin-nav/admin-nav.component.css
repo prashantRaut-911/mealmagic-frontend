@@ -1,0 +1,100 @@
+/* ===== Global Reset (for consistency with rest of site) ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* ===== Admin Navbar ===== */
+.navbar {
+  background-color: #ff7043 !important; /* Matching brand orange */
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 64px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.navbar a.nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  transition: background-color 0.3s ease-in-out;
+  border-radius: 6px;
+  text-transform: none;
+}
+
+.navbar a.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+button.btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+button.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== Toggle Button ===== */
+button.navbar-toggler {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+button.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+button.navbar-toggler:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Mobile Menu Animation ===== */
+.collapse.navbar-collapse {
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+/* ===== Mobile Responsive Adjustments ===== */
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+    padding: 0.8rem 1rem;
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar a.nav-link {
+    display: block;
+    padding: 10px 0;
+    margin: 2px 0;
+  }
+
+  .navbar a.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  button.btn-outline-light {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,114 @@
+/* 🍲 Dish Cards */
+.card {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* 🖼️ Dish Image (1:1 Aspect Ratio) */
+.ratio-1x1 img {
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+/* 📄 Card Text */
+.card-title {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* 🧡 Buttons */
+.btn-primary {
+  background-color: #ff7043;
+  border-color: #ff7043;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #ff5722;
+  border-color: #ff5722;
+}
+
+.btn-danger {
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #d32f2f;
+}
+
+/* 🗑️ Delete Popup */
+.delete-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+  animation: scaleIn 0.3s ease;
+}
+
+/* 🚫 No Result */
+.no-result {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #777;
+}
+
+/* ✨ Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 📱 Responsive Tweaks */
+@media (max-width: 576px) {
+  .card-body {
+    padding: 12px;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
+  .card-text {
+    font-size: 0.85rem;
+  }
+}

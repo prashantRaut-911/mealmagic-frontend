@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-dark meal-navbar px-3 shadow-sm">
+  <a class="navbar-brand fw-bold text-white" routerLink="/admin/dashboard">
+    🍴 Meal Magic Admin
+  </a>
+
+  <!-- Mobile Toggler -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    (click)="isMenuCollapsed = !isMenuCollapsed"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible Menu -->
+  <div
+    class="collapse navbar-collapse"
+    [ngClass]="{ show: !isMenuCollapsed }"
+  >
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active">
+          Dashboard
+        </a>
+      </li>
+
+      <!-- Manage Dropdown -->
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Manage
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" routerLink="/admin/add-dish">Add Dish</a></li>
+          <li><a class="dropdown-item" routerLink="/admin/dishes">View Dishes</a></li>
+          <li><a class="dropdown-item" routerLink="/admin/orders">Orders</a></li>
+          <li><a class="dropdown-item" routerLink="/admin/reviews">Reviews</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <button class="btn btn-orange ms-3" (click)="logout()">
+          Logout
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Admin Page Content -->
+<div class="container-fluid mt-4">
+  <router-outlet></router-outlet>
+</div>

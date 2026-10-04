@@ -1,0 +1,94 @@
+<div class="container mt-4">
+  <h3 class="mb-4 text-center text-success">
+    <i class="bi bi-egg-fried"></i> Manage Dishes
+  </h3>
+
+  <!-- 🔍 Search and Filter -->
+  <div class="row justify-content-center mb-4 g-2">
+    <div class="col-10 col-md-6">
+      <input type="text" class="form-control" placeholder="Search dishes..." [(ngModel)]="searchTerm"
+        (input)="filterDishes()" />
+    </div>
+    <div class="col-8 col-md-3">
+      <select class="form-select" [(ngModel)]="selectedCuisine" (change)="filterDishes()">
+        <option value="All">All Cuisines</option>
+        <option *ngFor="let cuisine of cuisines" [value]="cuisine">
+          {{ cuisine }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 🍲 Dish Cards -->
+  <div *ngIf="filteredDishes.length > 0; else noDishes" class="row g-3">
+    <div *ngFor="let dish of paginatedDishes" class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="card shadow-sm h-100 dish-card">
+        <div class="ratio ratio-1x1">
+         <img [src]="dish.coverImage" alt="{{ dish.dishName }}" class="card-img-top" />
+
+
+        </div>
+
+        <div class="card-body text-center">
+          <h5 class="card-title text-dark mb-2">{{ dish.dishName }}</h5>
+          <p class="card-text text-muted small mb-2">{{ dish.description }}</p>
+
+          <p class="card-text mb-1"><strong>Cuisine:</strong> {{ dish.cuisine }}</p>
+          <p class="card-text mb-1"><strong>Price:</strong> ₹{{ dish.price }}</p>
+
+          <p class="card-text mb-1">
+            <strong>Availability:</strong>
+            <span [ngClass]="{
+                'text-success': dish.availability,
+                'text-danger': !dish.availability
+              }">
+              {{ dish.availability ? 'Available' : 'Out of Stock' }}
+            </span>
+          </p>
+        </div>
+
+        <div class="card-footer d-flex justify-content-between px-3">
+          <button class="btn btn-sm btn-primary" (click)="editDish(dish)">
+            Edit
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="confirmDelete(dish)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🚫 No Dishes -->
+  <ng-template #noDishes>
+    <div class="text-center text-muted mt-5 no-result">
+      No dishes found.
+    </div>
+  </ng-template>
+
+  <!-- 📄 Pagination -->
+  <div class="d-flex justify-content-center align-items-center mt-4 flex-wrap gap-2">
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)">
+      Previous
+    </button>
+    <span class="text-nowrap">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)">
+      Next
+    </button>
+  </div>
+</div>
+
+<!-- 🗑️ Delete Confirmation Popup -->
+<div *ngIf="dishToDelete" class="delete-popup">
+  <div class="popup-content">
+    <h5>Confirm Deletion</h5>
+    <p>
+      Are you sure you want to delete
+      <strong>{{ dishToDelete.dishName }}</strong>?
+    </p>
+    <button class="btn btn-danger me-2" (click)="deleteDish()">Yes, Delete</button>
+    <button class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
+  </div>
+</div>

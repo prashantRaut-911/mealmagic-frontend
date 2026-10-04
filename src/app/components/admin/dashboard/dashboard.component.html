@@ -1,0 +1,102 @@
+<div class="dashboard-container container-fluid py-4">
+  <!-- Title -->
+  <h2 class="text-center fw-bold mb-4">Admin Dish Dashboard</h2>
+  <hr />
+
+  <!-- Stats -->
+  <div class="row text-center justify-content-center g-4 mb-5">
+    <div class="col-6 col-md-3">
+      <div class="stat-card stat-dishes shadow">
+        <h5>TOTAL DISHES</h5>
+        <h2>{{ totalDishes }}</h2>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="stat-card stat-users shadow">
+        <h5>TOTAL USERS</h5>
+        <h2>{{ totalUsers }}</h2>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="stat-card stat-orders shadow">
+        <h5>TOTAL ORDERS</h5>
+        <h2>24</h2>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="stat-card stat-reviews shadow">
+        <h5>TOTAL REVIEWS</h5>
+        <h2>62</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and Sort Controls -->
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3">
+    <input
+      type="text"
+      class="form-control w-auto flex-fill"
+      placeholder="Search by username or email..."
+      [(ngModel)]="searchQuery"
+      (input)="filterUsers()"
+    />
+
+    <div class="d-flex align-items-center gap-2">
+      <label class="fw-semibold">Sort by:</label>
+      <select class="form-select w-auto" [(ngModel)]="sortField" (change)="sortUsers()">
+        <option value="username">Username</option>
+        <option value="email">Email</option>
+      </select>
+
+      <button class="btn btn-sm sort-toggle-btn" (click)="toggleSortOrder()">
+        <i class="bi" [ngClass]="sortOrder === 'asc' ? 'bi-arrow-up-circle-fill' : 'bi-arrow-down-circle-fill'"></i>
+        <span class="ms-1">{{ sortOrder === 'asc' ? 'A → Z' : 'Z → A' }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- User Table -->
+  <div class="container px-0 mt-4">
+    <h2 class="fw-bold mb-3">User List</h2>
+
+    <table class="table table-hover text-center align-middle shadow-sm rounded-3 overflow-hidden">
+      <thead class="table-header text-white bg-primary">
+        <tr>
+          <th>USERNAME</th>
+          <th>EMAIL</th>
+          <th>MOBILE NUMBER</th>
+          <th>ROLE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers">
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.mobileNumber }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="paginatedUsers.length === 0" class="text-center text-muted mt-3">
+      No users found.
+    </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="d-flex justify-content-center align-items-center mt-4 flex-wrap gap-2">
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+      Previous
+    </button>
+
+    <span class="text-nowrap">Page {{ currentPage }} of {{ totalPages }}</span>
+
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">
+      Next
+    </button>
+  </div>
+  
+</div>

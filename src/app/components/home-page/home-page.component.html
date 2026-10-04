@@ -1,0 +1,165 @@
+<!-- ===== Navbar ===== -->
+<mat-toolbar color="primary" class="navbar px-3 d-flex justify-content-between align-items-center bg-dark shadow-sm">
+  <span class="fs-4 fw-bold text-white">🍽️ Meal Magic</span>
+
+  <!-- Desktop Links -->
+  <nav class="d-none d-md-flex gap-3">
+    <a mat-button routerLink="/home" class="text-light">Home</a>
+    <a mat-button routerLink="/login" class="text-light">Login</a>
+    <a mat-button routerLink="/signup" class="text-light">Signup</a>
+    <a mat-button routerLink="/user/view-dishes" class="text-light">Dishes</a>
+    <a mat-button routerLink="/admin/dashboard" class="text-light">Dashboard</a>
+  </nav>
+
+  <!-- Mobile Toggle -->
+  <button mat-icon-button class="d-md-none text-warning" (click)="toggleMenu()">
+    <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu bg-dark" [class.open]="isMenuOpen">
+  <a routerLink="/home" (click)="toggleMenu()">Home</a>
+  <a routerLink="/login" (click)="toggleMenu()">Login</a>
+  <a routerLink="/signup" (click)="toggleMenu()">Signup</a>
+  <a routerLink="/user/view-dishes" (click)="toggleMenu()">Dishes</a>
+  <a routerLink="/admin/dashboard" (click)="toggleMenu()">Dashboard</a>
+</div>
+
+<!-- ===== Hero Banner ===== -->
+<section
+  class="banner d-flex flex-column justify-content-center align-items-center text-center text-light position-relative">
+  <div class="banner-overlay"></div>
+  <div class="banner-content position-relative">
+    <h1 class="fw-bold display-4 mb-3 text-white animate-fade-in">Discover the Taste of Perfection</h1>
+    <p class="lead text-white mb-4 animate-fade-in delay-1">Delicious dishes crafted with passion and served fresh to
+      your doorstep.</p>
+    <button mat-raised-button color="accent" class="mt-2 fw-semibold px-4 py-2 animate-fade-in delay-2"
+      routerLink="/user/view-dishes">
+      Order Now
+    </button>
+  </div>
+</section>
+
+<!-- ===== Welcome Section ===== -->
+<section class="welcome-section text-center container py-5">
+  <h2 class="fw-bold text-primary mb-3">Welcome to Meal Magic</h2>
+  <p class="text-muted">
+    Meal Magic is your one-stop destination for exploring a wide range of cuisine crafted by top chefs.
+  </p>
+  <p class="text-muted">
+    Whether you crave something spicy or sweet, we have it all ready to delight your taste buds.
+  </p>
+  <p class="text-muted">
+    Join us today and experience the magic of flavors delivered right to your door!
+  </p>
+</section>
+<!-- ===== Customer Reviews Section ===== -->
+<div class="container my-5 py-4">
+  <h2 class="fw-bold text-center mb-4 text-warning">What Our Customers Say</h2>
+
+  <div *ngIf="randomReviews.length > 0; else noReviews">
+    <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let review of randomReviews; let i = index" [class.active]="i === 0">
+          <div class="d-flex justify-content-center">
+            <div
+              class="review-card bg-dark text-light shadow-lg rounded-4 p-4 text-center w-75 border border-secondary">
+              <i class="bi bi-quote text-warning fs-1 quote-icon"></i>
+
+              <p class="review-text my-3 fst-italic text-light">
+                "{{ review.reviewText }}"
+              </p>
+
+              <!-- Rating -->
+              <div class="mb-3">
+                <ng-container *ngFor="let _ of [].constructor(review.rating)">
+                  <i class="bi bi-star-fill text-warning"></i>
+                </ng-container>
+                <ng-container *ngFor="let _ of [].constructor(5 - review.rating)">
+                  <i class="bi bi-star text-muted"></i>
+                </ng-container>
+              </div>
+
+              <p class="fw-semibold mb-0 text-warning">
+                Dish: {{ review.dish?.dishName || 'N/A' }} -  Cuisine : {{ review.dish?.cuisine || '' }}
+              </p>
+              <!-- <p class="text-secondary small mb-3">
+               
+              </p> -->
+
+
+              <div class="d-flex align-items-center justify-content-center gap-2">
+                <div
+                  class="profile-circle bg-warning text-dark fw-bold d-flex align-items-center justify-content-center">
+                  {{ review.userId.username.charAt(0).toUpperCase() }}
+                </div>
+                <span class="fw-bold text-light">{{ review.userId.username }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-warning rounded-circle p-2" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-warning rounded-circle p-2" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <ng-template #noReviews>
+    <p class="text-center text-muted mt-4">No reviews yet. Be the first to share your feedback!</p>
+  </ng-template>
+</div>
+
+<!-- ===== Footer ===== -->
+<footer class="footer text-light py-5 bg-dark border-top border-secondary">
+  <div class="container">
+    <div class="row gy-4 align-items-start">
+      <!-- Contact Us -->
+      <div class="col-12 col-md-3">
+        <h5 class="text-warning mb-3">Contact Us</h5>
+        <p class="mb-1"><i class="bi bi-envelope me-2"></i> support@mealmagic.com</p>
+        <p><i class="bi bi-telephone me-2"></i> +91 88874 68746</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-12 col-md-3">
+        <h5 class="text-warning mb-3">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="footer-link">About Us</a></li>
+          <li><a href="#" class="footer-link">FAQs</a></li>
+          <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <!-- Follow Us -->
+      <div class="col-12 col-md-3">
+        <h5 class="text-warning mb-3">Follow Us</h5>
+        <div class="social-icons d-flex gap-3">
+          <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="col-12 col-md-3 text-md-end text-center mt-4 pt-3  mt-md-0">
+        <h5 class="footer-heading mb-2">&copy; 2025 Meal Magic</h5>
+        <p class="footer-subtext mb-0">All rights reserved.</p>
+      </div>
+    </div>
+
+    <hr class="border-secondary my-4">
+
+    <div class="text-center small text-secondary">
+      Crafted with ❤️ by <strong class="text-warning">Meal Magic Team</strong>
+    </div>
+  </div>
+</footer>

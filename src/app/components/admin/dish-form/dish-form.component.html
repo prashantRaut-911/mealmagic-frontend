@@ -1,0 +1,97 @@
+<div class="container py-4">
+  <div class="card shadow-sm border-0 mx-auto" style="max-width: 600px;">
+    <div class="card-body">
+      <h4 class="text-center mb-3 text-primary">
+        {{ isEditMode ? 'Edit Dish' : 'Add New Dish' }}
+      </h4>
+
+
+
+
+      <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Dish Name -->
+        <div class="mb-3">
+          <label for="dishName" class="form-label">Dish Name</label>
+          <input type="text" id="dishName" class="form-control" formControlName="dishName"
+            placeholder="Enter dish name" />
+          <div class="text-danger small mt-1"
+            *ngIf="dishForm.get('dishName')?.touched && dishForm.get('dishName')?.invalid">
+            Dish name is required.
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" rows="3" class="form-control" formControlName="description"
+            placeholder="Enter dish description"></textarea>
+          <div class="text-danger small mt-1"
+            *ngIf="dishForm.get('description')?.touched && dishForm.get('description')?.invalid">
+            Description is required.
+          </div>
+        </div>
+
+        <!-- Cuisine -->
+        <div class="mb-3">
+          <label for="cuisine" class="form-label">Cuisine</label>
+          <input type="text" id="cuisine" class="form-control" formControlName="cuisine"
+            placeholder="e.g., Italian, Indian" />
+          <div class="text-danger small mt-1"
+            *ngIf="dishForm.get('cuisine')?.touched && dishForm.get('cuisine')?.invalid">
+            Cuisine is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="stockQuantity" class="form-label">Stock Quantity</label>
+          <input type="number" id="stockQuantity" class="form-control" formControlName="stockQuantity"
+            placeholder="Enter stock quantity" min="0" />
+          <div class="text-danger small mt-1" *ngIf="
+      dishForm.get('stockQuantity')?.touched &&
+      dishForm.get('stockQuantity')?.invalid
+    ">
+            Enter a valid stock quantity.
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+          <label for="price" class="form-label">Price (₹)</label>
+          <input type="number" id="price" class="form-control" formControlName="price" placeholder="Enter price" />
+          <div class="text-danger small mt-1" *ngIf="dishForm.get('price')?.touched && dishForm.get('price')?.invalid">
+            Enter a valid price.
+          </div>
+        </div>
+
+        <!-- Availability -->
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="availability" formControlName="availability" />
+          <label for="availability" class="form-check-label">
+            Available
+          </label>
+        </div>
+
+        <!-- Cover Image -->
+        <div class="mb-3">
+          <label for="coverImage" class="form-label">Cover Image</label>
+          <input type="file" id="coverImage" class="form-control" (change)="onFileSelect($event)" accept="image/*" />
+          <div class="text-danger small mt-1" *ngIf="!selectedFile && formSubmitted">
+            Please upload a cover image.
+          </div>
+
+          <div *ngIf="previewUrl" class="text-center mt-3">
+            <img [src]="previewUrl" alt="Preview" class="img-thumbnail rounded"
+              style="width: 150px; height: 150px; object-fit: cover;" />
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button class="btn btn-primary" type="submit" [disabled]="dishForm.invalid">
+            {{ isEditMode ? 'Update Dish' : 'Add Dish' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,218 @@
+/* ===== USER NAVBAR (Global Theme) ===== */
+.navbar {
+  background-color: #ff7043 !important; /* rich orange */
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 64px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Brand */
+.navbar-brand {
+  color: #fff !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #ffe6dc !important;
+}
+
+/* Nav Links */
+.navbar a.nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+}
+
+.navbar a.nav-link.active,
+.navbar a.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff !important;
+}
+
+/* ===== ORANGE BUTTON THEME ===== */
+.btn-orange {
+  background-color: #fff;
+  color: #ff7043;
+  border: none;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-orange:hover {
+  background-color: #ff8a65;
+  color: #fff;
+}
+
+/* ===== OUTLINE LIGHT BUTTON ===== */
+button.btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+button.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== HAMBURGER (Toggle Button) ===== */
+button.navbar-toggler {
+  border: none;
+  background: none !important; /* transparent background */
+  box-shadow: none !important;
+  transition: transform 0.3s ease-in-out;
+}
+
+button.navbar-toggler:focus {
+  box-shadow: none !important;
+}
+
+button.navbar-toggler:hover {
+  transform: rotate(90deg);
+}
+
+/* Ensure white lines for hamburger icon */
+.navbar-toggler-icon {
+  background-image: linear-gradient(
+    to bottom,
+    #fff 0%,
+    #fff 20%,
+    transparent 20%,
+    transparent 40%,
+    #fff 40%,
+    #fff 60%,
+    transparent 60%,
+    transparent 80%,
+    #fff 80%,
+    #fff 100%
+  ) !important;
+  width: 25px;
+  height: 18px;
+  background-size: 100% 100%;
+  border-radius: 2px;
+}
+
+/* ===== MOBILE VIEW ===== */
+@media (max-width: 767px) {
+  .navbar {
+    height: auto;
+    padding: 0.8rem 1rem;
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar a.nav-link {
+    display: block;
+    padding: 10px 0;
+    margin: 2px 0;
+  }
+
+  .btn-orange {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  button.btn-outline-light {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Collapsed menu with soft background card look */
+  .navbar-collapse {
+    background-color: #ff7043 !important;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+  }
+}
+
+/* ===== TABLET VIEW (768px – 989px) ===== */
+@media (min-width: 768px) and (max-width: 989px) {
+  .navbar {
+    background-color: #ff8a65 !important; /* softer orange for smooth visual */
+    height: auto;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0 0 12px 12px; /* card-like navbar bottom curve */
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  .navbar-brand {
+    color: #fff !important;
+    font-size: 1.1rem;
+  }
+
+  .navbar a.nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    padding: 8px 12px;
+    margin: 2px;
+    border-radius: 8px;
+  }
+
+  .navbar a.nav-link:hover,
+  .navbar a.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+
+  /* Collapsed section looks like a card */
+  .navbar-collapse {
+    background-color: #ff7043 !important;
+    border-radius: 12px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
+    padding: 0.75rem 1.25rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Hamburger stays minimal (white lines only) */
+  .navbar-toggler {
+    background: none !important;
+    border: none;
+    padding: 0.3rem;
+  }
+
+  .navbar-toggler-icon {
+    background-image: linear-gradient(
+      to bottom,
+      #fff 0%,
+      #fff 20%,
+      transparent 20%,
+      transparent 40%,
+      #fff 40%,
+      #fff 60%,
+      transparent 60%,
+      transparent 80%,
+      #fff 80%,
+      #fff 100%
+    ) !important;
+  }
+
+  .navbar-toggler:hover {
+    transform: rotate(90deg);
+  }
+
+  .btn-orange {
+    background-color: #fff;
+    color: #ff7043;
+    font-weight: 600;
+  }
+
+  .btn-orange:hover {
+    background-color: #ff8a65;
+    color: #fff;
+  }
+}

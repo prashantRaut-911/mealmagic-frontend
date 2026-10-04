@@ -1,0 +1,28 @@
+body {
+  background-color: #121212;
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.btn-outline-warning:hover {
+  background-color: #ff9800;
+  color: #121212;
+}
+
+.text-warning {
+  color: #ffa726 !important;
+}
+
+input.form-control {
+  background-color: #1e1e1e;
+  border: 1px solid #ffa726;
+  color: white;
+}
+
+input.form-control:focus {
+  border-color: #ffb74d;
+  box-shadow: 0 0 5px #ffb74d;
+}

@@ -1,0 +1,142 @@
+<div class="container mt-4">
+  <h3 class="text-center fw-bold mb-4">View Dish Reviews</h3>
+
+  <!-- Search and Sort -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <input
+      type="text"
+      class="form-control w-50"
+      placeholder="Search reviews..."
+      [(ngModel)]="searchQuery"
+    />
+
+    <div>
+      <label class="me-2 fw-semibold">Sort by Date:</label>
+      <button
+        class="btn btn-outline-secondary btn-sm"
+        (click)="toggleSortOrder()"
+      >
+        {{ sortOrder === 'asc' ? 'Ascending' : 'Descending' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Review Cards -->
+  <div
+    *ngFor="let review of filteredReviews"
+    class="border-start border-4 border-success rounded p-3 mb-3 shadow-sm bg-white"
+  >
+  <h5 class="fw-bold">{{ getDishName(review) }}</h5>
+
+
+    <div class="text-warning mb-2">
+      <ng-container *ngFor="let star of [].constructor(review.rating)">
+        ★
+      </ng-container>
+    </div>
+
+    <p class="mb-1"><strong>Date:</strong> {{ review.createdAt | date: 'mediumDate' }}</p>
+    <p class="text-muted">{{ review.reviewText }}</p>
+
+    <div class="d-flex justify-content-between">
+      <button
+        class="btn btn-primary w-50 me-2"
+        (click)="viewDish(review.dishId)"
+      >
+        VIEW DISH
+      </button>
+
+      <button
+        class="btn btn-danger w-50"
+        (click)="viewProfile(review.userId)"
+      >
+        VIEW PROFILE
+      </button>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center align-items-center mt-4">
+    <button
+      class="btn btn-outline-secondary me-2"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1"
+    >
+      Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      class="btn btn-outline-secondary ms-2"
+      (click)="nextPage()"
+      [disabled]="currentPage >= totalPages"
+    >
+      Next
+    </button>
+  </div>
+</div>
+
+<!-- Dish Details Modal -->
+<div
+  class="modal fade"
+  id="dishModal"
+  tabindex="-1"
+  aria-labelledby="dishModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold" id="dishModalLabel">Dish Details</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        ></button>
+      </div>
+
+      <div class="modal-body text-center" *ngIf="selectedDish">
+        <img
+          [src]="selectedDish.coverImage"
+          alt="{{ selectedDish.dishName }}"
+          class="img-fluid mb-3 rounded"
+          style="max-height: 200px;"
+        />
+        <p><strong>Dish:</strong> {{ selectedDish.dishName }}</p>
+        <p><strong>Cuisine:</strong> {{ selectedDish.cuisine }}</p>
+        <p><strong>Price:</strong> ₹{{ selectedDish.price }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- User Profile Modal -->
+<div
+  class="modal fade"
+  id="profileModal"
+  tabindex="-1"
+  aria-labelledby="profileModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold" id="profileModalLabel">User Profile</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="closeProfileModal()"
+        ></button>
+      </div>
+
+      <div class="modal-body text-center" *ngIf="selectedUser">
+        <p><strong>Name:</strong> {{ selectedUser.username }}</p>
+        <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+        <p><strong>Role:</strong> {{ selectedUser.role }}</p>
+      </div>
+    </div>
+  </div>
+</div>

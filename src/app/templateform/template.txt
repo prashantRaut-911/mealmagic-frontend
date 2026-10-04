@@ -1,0 +1,197 @@
+<div class="container mt-4">
+  <h2>Employee Management</h2>
+
+  <!-- Employee Form -->
+  <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm)" novalidate>
+    <div class="form-group mb-2">
+      <label>Name:</label>
+      <input type="text" name="name" [(ngModel)]="employee.name" required minlength="3" class="form-control"
+             #name="ngModel">
+      <div *ngIf="name.invalid && name.touched" class="text-danger">
+        <small *ngIf="name.errors?.['required']">Name is required.</small>
+        <small *ngIf="name.errors?.['minlength']">Minimum 3 characters.</small>
+      </div>
+    </div>
+
+    <div class="form-group mb-2">
+      <label>Email:</label>
+      <input type="email" name="email" [(ngModel)]="employee.email" required email class="form-control"
+             #email="ngModel">
+      <div *ngIf="email.invalid && email.touched" class="text-danger">
+        <small *ngIf="email.errors?.['required']">Email is required.</small>
+        <small *ngIf="email.errors?.['email']">Invalid email format.</small>
+      </div>
+    </div>
+
+    <div class="form-group mb-2">
+      <label>Gender:</label>
+      <select name="gender" [(ngModel)]="employee.gender" required class="form-control" #gender="ngModel">
+        <option value="">--Select--</option>
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+      <div *ngIf="gender.invalid && gender.touched" class="text-danger">
+        <small>Gender is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group mb-2">
+      <label>Department:</label>
+      <input type="text" name="department" [(ngModel)]="employee.department" required class="form-control"
+             #dept="ngModel">
+      <div *ngIf="dept.invalid && dept.touched" class="text-danger">
+        <small>Department is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group mb-2">
+      <label>Joining Date:</label>
+      <input type="date" name="joiningDate" [(ngModel)]="employee.joiningDate" required class="form-control"
+             #joinDate="ngModel">
+      <div *ngIf="joinDate.invalid && joinDate.touched" class="text-danger">
+        <small>Date is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group mb-2">
+      <label>Salary:</label>
+      <input type="number" name="salary" [(ngModel)]="employee.salary" required min="1000" class="form-control"
+             #salary="ngModel">
+      <div *ngIf="salary.invalid && salary.touched" class="text-danger">
+        <small *ngIf="salary.errors?.['required']">Salary is required.</small>
+        <small *ngIf="salary.errors?.['min']">Minimum salary is 1000.</small>
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Is Permanent:</label>
+      <input type="checkbox" name="isPermanent" [(ngModel)]="employee.isPermanent" />
+    </div>
+
+    <!-- Custom Validation Message -->
+    <div *ngIf="customError" class="text-danger mb-2">
+      {{ customError }}
+    </div>
+
+    <button class="btn btn-primary me-2" [disabled]="empForm.invalid">{{ editMode ? 'Update' : 'Add' }}</button>
+    <button class="btn btn-secondary" type="button" (click)="resetForm(empForm)">Reset</button>
+  </form>
+
+  <hr>
+
+  <!-- Employee Table -->
+  <table class="table table-bordered mt-3">
+    <thead class="table-light">
+      <tr>
+        <th>ID</th><th>Name</th><th>Email</th><th>Gender</th>
+        <th>Department</th><th>Date</th><th>Salary</th><th>Permanent</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees">
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.gender }}</td>
+        <td>{{ emp.department }}</td>
+        <td>{{ emp.joiningDate }}</td>
+        <td>{{ emp.salary | currency:'INR' }}</td>
+        <td>{{ emp.isPermanent ? 'Yes' : 'No' }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-1" (click)="onEdit(emp)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="onDelete(emp.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+============================
+
+.container {
+  max-width: 800px;
+}
+
+.text-danger {
+  font-size: 13px;
+}
+
+==================================
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Employee, EmployeeService } from '../services/employee.service';
+
+@Component({
+  selector: 'app-templateform',
+  templateUrl: './templateform.component.html',
+  styleUrls: ['./templateform.component.css']
+})
+export class TemplateformComponent implements OnInit {
+
+  employees: Employee[] = [];
+  employee: Employee = this.getEmptyEmployee();
+  editMode = false;
+  customError = '';
+
+  constructor(private empService: EmployeeService) {}
+
+  ngOnInit() {
+    this.employees = this.empService.getAll();
+  }
+
+  getEmptyEmployee(): Employee {
+    return {
+      id: 0,
+      name: '',
+      email: '',
+      gender: '',
+      department: '',
+      joiningDate: '',
+      salary: 0,
+      isPermanent: false
+    };
+  }
+
+  // Custom validation before save
+  validateCustom(emp: Employee): boolean {
+    if (emp.name.toLowerCase() === 'test') {
+      this.customError = 'Name "test" is not allowed!';
+      return false;
+    }
+    this.customError = '';
+    return true;
+  }
+
+  onSubmit(form: NgForm) {
+    if (!this.validateCustom(this.employee)) return;
+
+    if (this.editMode) {
+      this.empService.update(this.employee.id, this.employee);
+      this.editMode = false;
+    } else {
+      this.empService.add(this.employee);
+    }
+
+    this.employees = this.empService.getAll();
+    this.resetForm(form);
+  }
+
+  onEdit(emp: Employee) {
+    this.employee = { ...emp };
+    this.editMode = true;
+  }
+
+  onDelete(id: number) {
+    this.empService.delete(id);
+    this.employees = this.empService.getAll();
+  }
+
+  resetForm(form: NgForm) {
+    form.resetForm();
+    this.employee = this.getEmptyEmployee();
+    this.editMode = false;
+    this.customError = '';
+  }
+}

@@ -1,0 +1,30 @@
+form {
+  max-width: 600px;
+  margin: auto;
+}
+
+label {
+  font-weight: 500;
+  color: #444;
+}
+
+button.btn-primary {
+  background-color: #ff7043;
+  border-color: #ff7043;
+  font-weight: 500;
+}
+
+button.btn-primary:hover {
+  background-color: #e86436;
+  border-color: #e86436;
+}
+
+input, textarea, select {
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  form {
+    padding: 1rem;
+  }
+}

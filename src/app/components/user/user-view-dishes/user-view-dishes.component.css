@@ -1,0 +1,160 @@
+/* ===========================
+   GENERAL PAGE STYLING
+=========================== */
+.container {
+  max-width: 1200px;
+}
+
+h1 {
+  color: #333;
+  letter-spacing: 0.5px;
+}
+
+/* ===========================
+   FILTER BAR
+=========================== */
+.filters input,
+.filters select {
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.2s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.5);
+  border-color: #198754;
+}
+
+/* ===========================
+   DISH CARD
+=========================== */
+.card {
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dish-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.card-text {
+  font-size: 0.9rem;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.btn {
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.btn-warning {
+  background-color: #ff7043;
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #e85b2a;
+}
+
+.btn-outline-dark:hover,
+.btn-outline-success:hover {
+  transform: scale(1.05);
+}
+
+/* ===========================
+   MODALS
+=========================== */
+.modal-content {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.modal-header {
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.modal-body {
+  background-color: #fffdf9;
+}
+
+.modal-footer {
+  border-top: 1px solid #eee;
+}
+
+/* ===========================
+   PAGINATION
+=========================== */
+.pagination .page-item {
+  margin: 0 3px;
+}
+
+.pagination .page-link {
+  color: black;
+  border: 1px solid #dee2e6;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+  background-color: #d1e7dd;
+  color: #198754;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #198754;
+  border-color: #198754;
+  color: white !important;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filters input,
+  .filters select {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .dish-img {
+    height: 160px;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-title {
+    font-size: 1rem;
+  }
+  .card-text {
+    font-size: 0.85rem;
+  }
+}
