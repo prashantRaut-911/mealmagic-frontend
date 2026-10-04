@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
     throw new Error('Method not implemented.');
   }
 
-  private backendUrl = 'http://localhost:8080';
+  private backendUrl = `${environment.apiUrl}`;
 
   
   private currentUserSubject = new BehaviorSubject<User | null>(null);
@@ -20,11 +21,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   signup(user: User): Observable<any> {
-    return this.http.post(`${this.backendUrl}/api/v1/auth/signup`, user);
+    return this.http.post(`${this.backendUrl}/auth/signup`, user);
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.backendUrl}/api/v1/auth/login`, { email, password }).pipe(
+    return this.http.post(`${this.backendUrl}/auth/login`, { email, password }).pipe(
       tap((res: any) => {
         localStorage.setItem('token', res.token);
         localStorage.setItem('user', JSON.stringify(res.user));
@@ -34,12 +35,12 @@ export class AuthService {
   }
 
    sendOtp(email: string): Observable<any> {
-    return this.http.post(`${this.backendUrl}/api/v1/auth/sendOtp`, { email });
+    return this.http.post(`${this.backendUrl}/auth/sendOtp`, { email });
   }
 
   // ✅ Reset Password
   resetPassword(email: string, otp: string, newPassword: string): Observable<any> {
-    return this.http.post(`${this.backendUrl}/api/v1/auth/resetPassword`, { email, otp, newPassword });
+    return this.http.post(`${this.backendUrl}/auth/resetPassword`, { email, otp, newPassword });
   }
 
   logout(): void {

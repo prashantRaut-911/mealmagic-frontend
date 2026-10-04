@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Dish } from '../models/dish.model'; // make sure to create this model
 import { DishResponse } from '../models/dishresponse.model';
+import { environment } from 'src/environments/environments.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DishService {
 
-  private baseUrl = 'http://localhost:8080/api/v1';
+  private baseUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) { }
 

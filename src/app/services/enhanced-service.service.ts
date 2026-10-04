@@ -4,12 +4,13 @@ import { Observable, map } from 'rxjs';
 import { Review } from '../models/review.model';
 import { Dish } from '../models/dish.model';
 import { User } from '../models/user.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EnhancedReviewService {
-  private baseUrl = 'http://localhost:8080'; // 🔧 adjust as per backend
+  private baseUrl =  `${environment.apiUrl}/api/v1`; // 🔧 adjust as per backend
 
   constructor(private http: HttpClient) {}
 
